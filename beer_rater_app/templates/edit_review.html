@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h2>Hi user! This is the Edit Review page</h2>
+
+
+<br>
+<div >
+
+
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.beer_id(size=32,placeholder="Beer") }}<br>
+            {% for error in form.beer_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.user_id(size=32,placeholder="UserID") }}<br>
+            {% for error in form.user_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.look(size=32,placeholder="Look") }}<br>
+            {% for error in form.look.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.smell(size=32,placeholder="Smell") }}<br>
+            {% for error in form.smell.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.taste(size=32,placeholder="Taste") }}<br>
+            {% for error in form.taste.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.feel(size=32,placeholder="Feel") }}<br>
+            {% for error in form.feel.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.notes(size=32,placeholder="Notes") }}<br>
+            {% for error in form.notes.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,2 @@
+* Add ‘Beers’ route, i.e. for beer in beers print beer, e.g. with photos
+* 

@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br>
+<div class="flex_container">
+    
+    <h2>Hi **user**! This is the Edit Beer page</h2>
+
+</div>
+<br>
+<br>
+
+
+<div class="flex_container">
+        
+    <form action="" method="post">
+
+        
+
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name(size=24,placeholder="Name of Beer") }}<br>
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.brewery_id(width=24, placeholder="Brewery") }}<br>
+            {% for error in form.brewery_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.style(size=24,placeholder="Style") }}<br>
+            {% for error in form.style.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.abv(size=24,placeholder="ABV (optional)") }}<br>
+            {% for error in form.abv.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.ibu(size=24,placeholder="IBUs (optional)") }}<br>
+            {% for error in form.ibu.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+
+</div>
+
+{% endblock %}

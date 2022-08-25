@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br>
+<div class="flex_container">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <h2>{{ message }}</h2>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+</div>
+<div class="back_beer">
+    <a href="/edit_beer">Return to Beer</a>
+    <a href="/edit_brewery">Forward to Brewery</a>
+</div>
+
+<br>
+<br>
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br>
+<div class="flex_container">
+    
+    <h2>Hi **user**! This is the Edit Brewery page</h2>
+
+</div>
+<br>
+<br>
+
+
+<div class="flex_container">
+
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.brewery_name(size=32,placeholder="Brewery") }}<br>
+            {% for error in form.brewery_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.brewery_city(size=32,placeholder="City") }}<br>
+            {% for error in form.brewery_city.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.brewery_state(size=32,placeholder="State") }}<br>
+            {% for error in form.brewery_state.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.brewery_url(size=32,placeholder="Website (optional)") }}<br>
+            {% for error in form.brewery_url.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+
+</div>
+
+{% endblock %}
