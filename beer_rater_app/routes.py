@@ -59,10 +59,18 @@ def list_beer():
         beer.brewery_state = Beer.query.get(beer.id).brewery.brewery_state
         beer.image_path = '/static/beer' + str(beer.id) + '.png'
 
-# Not thought thru yet. see review.beer_id above, working. now need to check 'overall' if review.beer_id exists, then average it.
-        # if beer.id == review.beer_id
-        #     scores = Review.query.get(beer_id).overall
-        #     print(scores)
+        beer_scores = []
+        beer_score_list = Review.query.filter(Review.beer_id == beer.id).all()
+        if len(beer_score_list) > 0:
+            print(beer_score_list)
+            for beer_score in beer_score_list:
+                beer_scores.append(beer_score.overall)
+            beer.avg_score = sum(beer_scores)/len(beer_scores)
+            beer.num_reviews = len(beer_scores)
+        else:
+            beer.avg_score = 0
+    # ordered_beers = beers.query.order_by(beers.avg_score).all()
+    popular_beers = Beer.query.order_by(Beer.num_reviews).all()
     return render_template('list_beer.html', users= users, beers= beers, breweries= breweries, reviews= reviews)
 
 
@@ -130,6 +138,17 @@ def admin():
     breweries = Brewery.query.all()
     for beer in beers:
         beer.brewery_name = Beer.query.get(beer.id).brewery.brewery_name
+
+        beer_scores = []
+        beer_score_list = Review.query.filter(Review.beer_id == beer.id).all()
+        if len(beer_score_list) > 0:
+            print(beer_score_list)
+            for beer_score in beer_score_list:
+                beer_scores.append(beer_score.overall)
+            beer.avg_score = sum(beer_scores)/len(beer_scores)
+            beer.num_reviews = len(beer_scores)
+        else:
+            beer.avg_score = 0
     reviews = Review.query.all()
     for review in reviews:
         review.beer_id = Review.query.get(review.id).beer.id
