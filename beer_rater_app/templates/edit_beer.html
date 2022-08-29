@@ -20,31 +20,31 @@
 
         {{ form.hidden_tag() }}
         <p>
-            {{ form.name(size=24,placeholder="Name of Beer") }}<br>
+            {{ form.name(size=26,placeholder="Name of Beer") }}<br>
             {% for error in form.name.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.brewery_id(width=24, placeholder="Brewery") }}<br>
+            {{ form.brewery_id(width=26, placeholder="Brewery") }}<br>
             {% for error in form.brewery_id.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.style(size=24,placeholder="Style") }}<br>
+            {{ form.style(size=26,placeholder="Style") }}<br>
             {% for error in form.style.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.abv(size=24,placeholder="ABV (optional)") }}<br>
+            {{ form.abv(size=26,placeholder="ABV (optional)") }}<br>
             {% for error in form.abv.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.ibu(size=24,placeholder="IBUs (optional)") }}<br>
+            {{ form.ibu(size=26,placeholder="IBUs (optional)") }}<br>
             {% for error in form.ibu.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}

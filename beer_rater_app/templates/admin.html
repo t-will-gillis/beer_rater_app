@@ -33,21 +33,25 @@
     <h1>Beers</h1>
     <table class="admin_tables_beers">
         <tr>
+            <th>ID</th>
             <th>Name</th>
-            <th>Brewery_id</th>
+            <th>Brewery</th>
             <th>Style</th>
             <th>ABV</th>
             <th>IBU</th>
+            <th>Score</th>
             <th># Reviews</th>
         </tr>
         
         {% for beer in beers %}
         <tr>
+            <td>{{beer.id}}</td>
             <td>{{beer.name}}</td>
-            <td>{{beer.brewery}}</td>
+            <td>{{beer.brewery_name}}</td>
             <td>{{beer.style}}</td>
             <td>{{beer.abv}}</td>
             <td>{{beer.ibu}}</td>
+            <td>{{beer.score}}</td>
             <td>{{beer.num_reviews}}</td>
         </tr>
         {% endfor %}
@@ -59,6 +63,7 @@
     <h1>Breweries</h1>
         <table class="admin_tables_breweries">
             <tr>
+                <th>ID</th>
                 <th>Brewery</th>
                 <th>City</th>
                 <th>State</th>
@@ -68,6 +73,7 @@
             
             {% for brewery in breweries %}
             <tr>
+                <td>{{brewery.id}}</td>
                 <td>{{brewery.brewery_name}}</td>
                 <td>{{brewery.brewery_city}}</td>
                 <td>{{brewery.brewery_state}}</td>
@@ -84,19 +90,21 @@
     <h1>Reviews</h1>
     <table class="admin_tables_reviews">
         <tr>
-            <th>Beer ID</th>
-            <th>Brewery ID</th>
+            <th>Username</th>
+            <th>Beer_ID</th>
+            <th>Beer</th>
+            <th>Brewery</th>
             <th>Overall</th>
-            <th>User ID</th>
             <th>Review Date</th>
         </tr>
         
         {% for review in reviews %}
         <tr>
+            <td>{{review.username}}</td>
             <td>{{review.beer_id}}</td>
-            <td>NEED QUERY</td>
+            <td>{{review.beer_name}}</td>
+            <td>{{review.brewery_name}}</td>
             <td>{{review.overall}}</td>
-            <td>{{review.user_id}}</td>
             <td>{{review.review_time}}</td>
         </tr>
         {% endfor %}

@@ -10,17 +10,21 @@ from models import Beer, Brewery, User, Review
 
 # Note that below only loads ONCE at beginning. We need to be dynamic!!!!!!!!!!!!!!!!!!!!
 def brewery_choices():
-    choices = [('8888','-Select Brewery-')]
+    choices = [('8888',' -  Select Brewery  -             ')]
     breweries = Brewery.query.order_by(Brewery.brewery_name).all()
     for brewery in breweries:
         choices.append((brewery.id, brewery.brewery_name))
-    choices.append(('9999' ,'-Add Brewery-'))
+    choices.append(('9999' ,' -  Add Brewery  -                '))
     return choices
+ 
 
-
-
-
-
+def beer_choices():
+    choices = [('8888',' -  Select Beer  -                ')]
+    beers = Beer.query.order_by(Beer.name).all()
+    for beer in beers:
+        choices.append((beer.id, beer.name))
+    choices.append(('9999' ,' -  Add Beer  -                   '))
+    return choices
 
 
 class SignupForm(FlaskForm):
@@ -60,10 +64,12 @@ class BreweryForm(FlaskForm):
     submit = SubmitField('AddBrewery')
 
 class ReviewForm(FlaskForm):
-    overall = DecimalField('Overall', places=1, validators=[DataRequired()])
-    look = DecimalField('Look', places=1)
-    smell = DecimalField('Smell', places=1)
-    taste = DecimalField('Taste', places=1)
-    feel = DecimalField('Feel', places=1)
+    beer_id = SelectField('Beer', choices=beer_choices(), validators=[InputRequired()], coerce=int)
+    user_id = IntegerField('User', default = 1)
+    overall = DecimalField('Overall', places=1, validators=[DataRequired(), NumberRange(min=0.5, max=5)])
+    look = DecimalField('Look', places=1, validators=[Optional(), NumberRange(min=0.5, max=5)])
+    smell = DecimalField('Smell', places=1, validators=[Optional(), NumberRange(min=0.5, max=5)])
+    taste = DecimalField('Taste', places=1, validators=[Optional(), NumberRange(min=0.5, max=5)])
+    feel = DecimalField('Feel', places=1, validators=[Optional(), NumberRange(min=0.5, max=5)])
     notes = TextAreaField('ReviewNotes')
     submit = SubmitField('AddReview')

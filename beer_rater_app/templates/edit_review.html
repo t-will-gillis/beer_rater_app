@@ -2,53 +2,67 @@
 
 {% block content %}
 
-<h2>Hi user! This is the Edit Review page</h2>
-
-
 <br>
-<div >
+<div class="flex_container">
+    
+    <h2>Hi **user**! This is the Edit Review page</h2>
+
+</div>
+<br>
+<br>
+
+
+<div class="flex_container">
+        
+    <form action="" method="post">
 
 
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
-            {{ form.beer_id(size=32,placeholder="Beer") }}<br>
+            {{ form.beer_id(width=26,placeholder="Beer") }}<br>
             {% for error in form.beer_id.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.user_id(size=32,placeholder="UserID") }}<br>
+            {{ form.user_id(size=26,placeholder="UserID") }}<br>
             {% for error in form.user_id.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.look(size=32,placeholder="Look") }}<br>
+            {{ form.overall(size=26,placeholder="Overall Out of 5 Max") }}<br>
+            {% for error in form.overall.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.look(size=26,placeholder="Look (optional)") }}<br>
             {% for error in form.look.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.smell(size=32,placeholder="Smell") }}<br>
+            {{ form.smell(size=26,placeholder="Smell (optional)") }}<br>
             {% for error in form.smell.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.taste(size=32,placeholder="Taste") }}<br>
+            {{ form.taste(size=26,placeholder="Taste (optional)") }}<br>
             {% for error in form.taste.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.feel(size=32,placeholder="Feel") }}<br>
+            {{ form.feel(size=26,placeholder="Feel (optional)") }}<br>
             {% for error in form.feel.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.notes(size=32,placeholder="Notes") }}<br>
+            {{ form.notes(size=26,placeholder="Notes") }}<br>
             {% for error in form.notes.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}

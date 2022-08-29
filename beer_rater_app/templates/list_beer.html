@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br>
+<div class="flex_container">
+    
+    <h2>Hi **user**! This is the List Beer page</h2>
+
+</div>
+<br>
+<br>
+
+
+<div class="flex_container_list">
+
+
+
+    <div class="outer_first">
+        <div class="outer_next">
+            
+
+            
+            <div class="item_body">
+
+                {% for beer in beers %}
+                
+                <div class="item_pic">
+                    <img src='{{ beer.image_path }}' alt="Beer Text" width="90px">
+                </div>
+
+                <div class="item_desc">
+                    <dl >
+                        <dt class="stat_labels"><span><b>Name:</b></span></dt>
+                        <dd class="stat_name"><span><b>{{ beer.name }}</b></span></dd>
+                
+                        <dt class="stat_labels"><span><b>Brewery:</b></span></dt>
+                        <dd class="stats"><span><b>{{ beer.brewery_name }}</b></span></dd>
+                        
+                        <dt class="stat_blank"></dt>
+                        <dd class="stat_minor"><span><b>{{ beer.brewery_city }}, {{ beer.brewery_state }}</b></span></dd>
+
+                        <dt class="stat_labels"><span><b>Style:</b></span></dt>
+                        <dd class="stats"><span><b>{{ beer.style }}</b></span></dd>
+                
+                        <dt class="stat_blank"></dt>
+                        <dd class="stat_minor"><span><b>Ranked in Style</b></span></dd>
+
+                        <dt class="stat_labels"><span><b>Score:</b></span></dt>
+                        <dd class="stats"><span><b>Score</b></span></dd>
+
+                        <dt class="stat_blank"></dt>
+                        <dd class="stat_minor"><span><b>Ranked Overall</b></span></dd>
+                        
+                        <dt class="stat_labels"><span><b>ABV:</b></span></dt>
+                        <dd class="stats"><span><b>{{ beer.abv }}%</b></span></dd>
+
+                        <dt class="stat_labels"></dt>
+                        <dd class="stats"></dd>
+                    </dl>
+                </div>
+                <div class="item_header"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+ 
+
+
+</div>
+
+{% endblock %}

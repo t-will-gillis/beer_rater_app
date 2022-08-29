@@ -6,15 +6,11 @@ from forms import SignupForm, BreweryForm, BeerForm, ReviewForm
 from models import Beer, Brewery, User, Review
 
 
-
-# Bootstrap examples
-@app.route('/bs_ex')
-def example():
-    return render_template('bs_ex.html')
-
-
-
-
+Beer.query.get(4).name='10:45 to Denver'
+Beer.query.get(4).style='IPA'
+Beer.query.get(4).abv=7.0
+Beer.query.get(4).ibu=50
+db.session.commit()
 
 # Landing page
 @app.route('/')
@@ -47,6 +43,27 @@ def signup():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+
+@app.route('/list_beer')
+def list_beer():
+    users = User.query.all()
+    beers = Beer.query.all()
+    breweries = Brewery.query.all()
+    reviews = Review.query.all()
+    for review in reviews:
+        review.beer_id = Review.query.get(review.id).beer.id
+    for beer in beers:
+        beer.brewery_name = Beer.query.get(beer.id).brewery.brewery_name
+        beer.brewery_city = Beer.query.get(beer.id).brewery.brewery_city
+        beer.brewery_state = Beer.query.get(beer.id).brewery.brewery_state
+        beer.image_path = '/static/beer' + str(beer.id) + '.png'
+
+# Not thought thru yet. see review.beer_id above, working. now need to check 'overall' if review.beer_id exists, then average it.
+        # if beer.id == review.beer_id
+        #     scores = Review.query.get(beer_id).overall
+        #     print(scores)
+    return render_template('list_beer.html', users= users, beers= beers, breweries= breweries, reviews= reviews)
 
 
 @app.route('/edit_brewery', methods=['GET', 'POST'])
@@ -111,7 +128,14 @@ def admin():
     users = User.query.all()
     beers = Beer.query.all()
     breweries = Brewery.query.all()
+    for beer in beers:
+        beer.brewery_name = Beer.query.get(beer.id).brewery.brewery_name
     reviews = Review.query.all()
+    for review in reviews:
+        review.beer_id = Review.query.get(review.id).beer.id
+        review.beer_name = Review.query.get(review.id).beer.name
+        review.brewery_name = Review.query.get(review.id).beer.brewery_name
+        review.username = Review.query.get(review.id).user.username
     return render_template('admin.html', users= users, beers= beers, breweries= breweries, reviews= reviews)
 
 
