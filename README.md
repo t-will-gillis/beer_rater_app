@@ -1,4 +1,4 @@
-# beer_rater_app
- App created using FlaskPy miniframework
+# Python Flask beer_rater_app
+ App created using Python Flask miniframework
  
- INITIAL commit, functioning but not completed app in early stage of development.
+ Addition of graphics, user inputs, database storage
