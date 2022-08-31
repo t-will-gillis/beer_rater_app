@@ -38,7 +38,6 @@
             <th>Brewery</th>
             <th>Style</th>
             <th>ABV</th>
-            <th>IBU</th>
             <th>Avg Score</th>
             <th># Reviews</th>
         </tr>
@@ -50,7 +49,6 @@
             <td>{{beer.brewery_name}}</td>
             <td>{{beer.style}}</td>
             <td>{{beer.abv}}</td>
-            <td>{{beer.ibu}}</td>
             <td>{{beer.avg_score}}</td>
             <td>{{beer.num_reviews}}</td>
         </tr>
@@ -78,7 +76,7 @@
                 <td>{{brewery.brewery_city}}</td>
                 <td>{{brewery.brewery_state}}</td>
                 <td>{{brewery.brewery_url}}</td>
-                <td>888</td>
+                <td>{{brewery.num_beers}}</td>
 
             </tr>
             {% endfor %}

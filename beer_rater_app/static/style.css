@@ -262,7 +262,9 @@
     background-color: #ddd;
   }
 
-
+  b {
+    width: 201.5px;
+  }
 
   /* Style the footer */
   .link {

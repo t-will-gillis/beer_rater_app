@@ -1,2 +1,12 @@
-* Add ‘Beers’ route, i.e. for beer in beers print beer, e.g. with photos
-* 
+DONE --> Add ‘Beers’ route, i.e. for beer in beers print beer, e.g. with photos
+DONE --> Add number of beers to Brewery
+DONE --> Add sorting by beer rating
+
+PROGRESS --> Add to Reviews- where are you drinking this? home/brewer/elsewhere?
+PROGRESS --> Add to reviews- bottle, can, draft?
+Add admin login and admin only access
+Add user login functionality/access to self edits only, and collection?
+
+
+
+Connect * 

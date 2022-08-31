@@ -6,11 +6,6 @@ from forms import SignupForm, BreweryForm, BeerForm, ReviewForm
 from models import Beer, Brewery, User, Review
 
 
-Beer.query.get(4).name='10:45 to Denver'
-Beer.query.get(4).style='IPA'
-Beer.query.get(4).abv=7.0
-Beer.query.get(4).ibu=50
-db.session.commit()
 
 # Landing page
 @app.route('/')
@@ -67,10 +62,9 @@ def list_beer():
                 beer_scores.append(beer_score.overall)
             beer.avg_score = sum(beer_scores)/len(beer_scores)
             beer.num_reviews = len(beer_scores)
-        else:
-            beer.avg_score = 0
-    # ordered_beers = beers.query.order_by(beers.avg_score).all()
-    popular_beers = Beer.query.order_by(Beer.num_reviews).all()
+
+    beers = Beer.query.order_by(Beer.avg_score.desc()).all()
+    sort_pop_beers = Beer.query.order_by(Beer.num_reviews.desc()).all()
     return render_template('list_beer.html', users= users, beers= beers, breweries= breweries, reviews= reviews)
 
 
@@ -118,6 +112,9 @@ def edit_review():
     if form.validate_on_submit():
         review = Review(beer_id=form.beer_id.data,
             user_id=form.user_id.data,
+            location = form.location.data,
+            container = form.container.data,
+            size = form.size.data,
             overall=form.overall.data,
             look=form.look.data,
             smell=form.smell.data,
@@ -135,20 +132,22 @@ def edit_review():
 def admin():
     users = User.query.all()
     beers = Beer.query.all()
-    breweries = Brewery.query.all()
     for beer in beers:
         beer.brewery_name = Beer.query.get(beer.id).brewery.brewery_name
 
         beer_scores = []
         beer_score_list = Review.query.filter(Review.beer_id == beer.id).all()
         if len(beer_score_list) > 0:
-            print(beer_score_list)
             for beer_score in beer_score_list:
                 beer_scores.append(beer_score.overall)
             beer.avg_score = sum(beer_scores)/len(beer_scores)
             beer.num_reviews = len(beer_scores)
         else:
             beer.avg_score = 0
+    breweries = Brewery.query.all()
+    for brewery in breweries:
+        beer_by_brew_list = Beer.query.filter(Beer.brewery_id == brewery.id).all()
+        brewery.num_beers = len(beer_by_brew_list)
     reviews = Review.query.all()
     for review in reviews:
         review.beer_id = Review.query.get(review.id).beer.id

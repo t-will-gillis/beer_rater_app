@@ -10,14 +10,16 @@ class Beer(db.Model):
     name = db.Column(db.String(30), index = True, unique = True)
     style = db.Column(db.String(30), index = True, unique = False)
     abv = db.Column(db.Float(2), index = True, unique = False, default=0.0)
-    ibu = db.Column(db.Integer, index = True, unique = False, default=0)
+    avg_score = db.Column(db.Float(2), index = True, unique = False, default=0)
     num_reviews = db.Column(db.Integer, index = True, unique = False, default=0)
+    beer_notes = db.Column(db.String(255), index = False, unique = False, default='Brewery notes about beer')
     brewery_id = db.Column(db.Integer, db.ForeignKey('brewery.id'))
     
     reviews = db.relationship('Review', backref='beer', lazy='dynamic')
 
     def __repr__(self):
         return f"{self.name} by {self.brewery_id}"
+
 
 class Brewery(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -26,9 +28,8 @@ class Brewery(db.Model):
     brewery_state = db.Column(db.String(16), index = True, unique = False)
     brewery_url = db.Column(db.String(40), index = True, unique = True)
 
-    # 8/22 8:30 pm change relationship Brewery '1', Beer 'N'
-    # beer_id = db.Column(db.Integer, db.ForeignKey('beer.id'))
     beers = db.relationship('Beer', backref='brewery', lazy='dynamic')
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -50,8 +51,12 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    location = db.Column(db.String, index = True, unique = False)
+    container = db.Column(db.String, index = True, unique = False)
+    size = db.Column(db.String, index = True, unique = False)
     overall = db.Column(db.Float(1), index = True, unique = False, default=0.0)
     look = db.Column(db.Float(1), index = False, unique = False, default=0.0)
     smell = db.Column(db.Float(1), index = False, unique = False, default=0.0)
@@ -61,6 +66,7 @@ class Review(db.Model):
     beer_id = db.Column(db.Integer, db.ForeignKey('beer.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     review_time = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
+
 
     def __repr__(self):
         return f"Review: {self.overall}" 

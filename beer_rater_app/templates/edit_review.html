@@ -26,8 +26,20 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.user_id(size=26,placeholder="UserID") }}<br>
-            {% for error in form.user_id.errors %}
+            {{ form.location(width=26,placeholder="UserID") }}<br>
+            {% for error in form.location.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.container(width=26,placeholder="UserID") }}<br>
+            {% for error in form.location.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.size(width=26,placeholder="UserID") }}<br>
+            {% for error in form.location.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
