@@ -1,8 +1,49 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<br>
+<br>
+<div class="greet_user">
 
-<h2>Hi user! This is the login page</h2>
-<p>login page</p>
+    <h2>Log In Below</h2><br><br>
+    <p style="text-align: center">New User? <a href="{{ url_for('signup') }}">Click to Sign Up!</a></p>
+
+</div>
+<br>
+<br>
+<div class="flash_message">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h2>{{ messages.pop() }}</h2>
+        {% endif %}
+    {% endwith %}
+    
+</div>
+
+<div class="flex_container">
+
+
+
+    
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username(size=32,placeholder="username") }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password(size=32,placeholder="password*$%!@") }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember() }} {{ form.remember.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+</div>
 
 {% endblock %}

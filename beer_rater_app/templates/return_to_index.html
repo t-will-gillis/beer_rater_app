@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class="flash_message">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h2>{{ messages.pop() }}</h2>
+        {% endif %}
+    {% endwith %}
+    
+</div>
+<div class="greet_user">
+    
+    <p>
+        <a href="/logout">Click to Log Out</a>
+        <a href="/list_beer">Go To Beer List</a>
+    </p>
+    
+</div>
+
+<br>
+<br>
+
+
+
+
+{% endblock %}

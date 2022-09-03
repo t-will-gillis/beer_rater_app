@@ -1,16 +1,24 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 <br>
-<div class="flex_container">
+<div class="greet_user">
     
-    <h2>Hi **user**! This is the List Beer page</h2>
+    <h2>Hi {{user.username}}! This is the Beer List</h2>
 
 </div>
 <br>
 <br>
-
+<div class="flash_message">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h2>{{ messages.pop() }}</h2> 
+        {% endif %}
+    {% endwith %}
+    
+</div>
 
 <div class="flex_container_list">
 

@@ -3,9 +3,19 @@
 {% block content %}
 
 <br>
+<br>
+<div class="greet_user">
+    
+    <h2>USER MOD</h2><br><br>
+    
+    <p>{{ user_ed.username }}</p>
+    
+</div>
+
+<br>
 <div class="flex_container">
     
-    <h2>Hi user! This is the signup page</h2>
+    <h2>Edit Below</h2>
 
 </div>
 <br>
@@ -14,15 +24,11 @@
 <div class="flex_container">
 
 
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username(size=32,placeholder="Username") }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
+    <form action="/update" method="POST">
+        
+        <input type="text" value="{{ user_ed.username }}" name="udpatedname">
+            
+        <!-- <p>
             {{ form.city(size=32,placeholder="City (optional)") }}<br>
             {% for error in form.city.errors %}
             <span style="color: red;">[{{ error }}]</span>
@@ -51,11 +57,14 @@
             {% for error in form.password2.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
+        </p> -->
+        <input type="submit" value="Update">
     </form>
 
 
 </div>
 
 {% endblock %}
+
+
+

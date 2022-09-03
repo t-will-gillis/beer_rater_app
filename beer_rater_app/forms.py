@@ -36,8 +36,12 @@ class SignupForm(FlaskForm):
     password2 = PasswordField('Reenter Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
-# class LoginForm(FlaskForm):
-
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[Optional(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
 
 # Create BeerForm, use SelectField to select from existing list of breweries, use SelectMultipleField to select style
@@ -52,7 +56,7 @@ class BeerForm(FlaskForm):
     style = StringField('Style')
     abv = DecimalField('ABV', places=1, validators=[Optional(), NumberRange(min=0.5, max=50)])
     avg_score = DecimalField('Score', places=1, validators=[Optional()])
-    notes = TextAreaField('ReviewNotes')
+    beer_notes = TextAreaField('ReviewNotes')
     num_reviews = IntegerField('NumReviews')
     
     submit = SubmitField('AddBeer')
@@ -67,9 +71,9 @@ class BreweryForm(FlaskForm):
 class ReviewForm(FlaskForm):
     beer_id = SelectField('Beer', choices=beer_choices(), validators=[InputRequired()], coerce=int)
     user_id = IntegerField('User', default = 1)
-    location = SelectField('Location', choices=['-   Select  Your  Location   -','At Brewery', 'Bar/ Restaurant', 'Casual/ Home', 'Other'], validators=[InputRequired()])
+    location = SelectField('Location', choices=['-   Select  Your  Location   -','At Brewery', 'Bar/ Restaurant', 'Home/Friends', 'Other'], validators=[InputRequired()])
     container = SelectField('Container', choices=['- Select Container Type -','Bottle', 'Can', 'Draft', 'Other'], validators=[InputRequired()])
-    size = SelectField('Size', choices=['- Select Container Size -','22 oz. / Bomber', '16 oz. / Pint', '12 oz', 'Taster', 'Other'], validators=[InputRequired()])
+    size = SelectField('Size', choices=['- Select Container Size -','22 oz / Bomber', '16 oz / Pint', '12 oz', 'Taster', 'Other'], validators=[InputRequired()])
     overall = DecimalField('Overall', places=1, validators=[DataRequired(), NumberRange(min=0, max=5)])
     look = DecimalField('Look', places=1, validators=[Optional(), NumberRange(min=0, max=5)])
     smell = DecimalField('Smell', places=1, validators=[Optional(), NumberRange(min=0, max=5)])

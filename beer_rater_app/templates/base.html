@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+        <title>Beer Rater</title>
+    </head>
+    <div class="topbar">
+        <div>
+            <img src="\static\beer_rater_header.jpg" alt="Beer Glasses", width="160">
+            <div>
+                <h1>BEER RATER APP</h1>
+            </div>
+            
+        </div>
+    </div>
+    <nav>
+        <div class="topnav">
+            <div class="nav_left">
+                <a class="coming_soon">MENU</a>
+                <a class='now' href="/list_beer">TOP RATED</a>
+                <a class="coming_soon">MOST REVIEWS</a>
+            </div>
+            <div class="nav_center">
+                <a href="/admin">ADMIN</a>
+                <a href="/edit_brewery">BREWERY</a>
+                <a href="/edit_beer">BEER</a>
+                <a href="/edit_review">REVIEW</a>
+            </div>
+            <div class="nav_right">
+                <a href="/logout">LOG OUT</a>
+                <a href="/login">LOG IN</a>
+                <a href="/signup">SIGN UP</a>
+            </div>
+        </div>
+    </nav>
+    <body>
+        
+
+        {% block content %}
+
+        {% endblock %}
+        
+    </body>
+</html>

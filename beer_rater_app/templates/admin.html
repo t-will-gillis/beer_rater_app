@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -6,13 +6,15 @@
 
 <div id="admin_tables">
     
-    <h2>Hi ADMIN. This is the Admin page</h2>
+    <h2>Hi Admin. This is the Admin page</h2>
     <br>
 
 <!--ALL Add edit button, OR functionality for popping up to edit delete when needed -->
     <h1>Users</h1>
         <table class="admin_tables_users">
             <tr>
+                <th>Edit</th>
+                <th>User ID</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Signed Up</th>
@@ -20,6 +22,8 @@
             
             {% for user in users %}
             <tr>
+                <td><b><a href="{{url_for('user_mod', user_id=user.id)}}">Edit</a></b></td>
+                <td>{{user.id}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.joined_at}}</td>

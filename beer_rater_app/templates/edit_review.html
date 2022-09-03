@@ -1,16 +1,30 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-
 <br>
-<div class="flex_container">
+<br>
+<div class="greet_user">
     
-    <h2>Hi **user**! This is the Edit Review page</h2>
+    <h2>Add Your Review, {{ user.username }}!</h2><br><br>
+    <p>Use the form below to add your review of any Beer in the current list.
+    If the beer you want to review is not in the current list, use the links
+    above to add the beer as well as the brewery if needed. The 'Notes' are
+    for your impression of the beer, and if you want to review based on the
+    'Beer Judge Certification Program: Beer Style Guidelines' (www.bjcp.org),
+    rate and score based on 'Look', 'Smell', 'Taste', and 'Feel'.</p>
 
 </div>
 <br>
 <br>
-
+<div class="flash_message">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h2>{{ messages.pop() }}</h2>
+        {% endif %}
+    {% endwith %}
+    
+</div>
 
 <div class="flex_container">
         
@@ -26,19 +40,19 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.location(width=26,placeholder="UserID") }}<br>
+            {{ form.location(width=26,placeholder="Location") }}<br>
             {% for error in form.location.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.container(width=26,placeholder="UserID") }}<br>
+            {{ form.container(width=26,placeholder="Container") }}<br>
             {% for error in form.location.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.size(width=26,placeholder="UserID") }}<br>
+            {{ form.size(width=26,placeholder="Size") }}<br>
             {% for error in form.location.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
