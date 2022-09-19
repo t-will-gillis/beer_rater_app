@@ -175,7 +175,7 @@ def edit_review():
     form = ReviewForm()
     if form.validate_on_submit():
         review = Review(beer_id=form.beer_id.data,
-            user_id=user,
+            user_id=user.id,
             location = form.location.data,
             container = form.container.data,
             size = form.size.data,
@@ -187,7 +187,9 @@ def edit_review():
             notes=form.notes.data)
         db.session.add(review)
         db.session.commit()  
-        print(f'Success! Edited review for beer: {review.beer_id}')
+        beer = Beer.query.get(review.beer_id)
+        print(f'Success! Edited review for beer: {beer.name}')
+        flash(f'Added review for {beer.name}!')
         return redirect(url_for('edit_review'))      
     return render_template('edit_review.html', form=form, user=user)
 
@@ -195,8 +197,8 @@ def edit_review():
 @app.route('/admin')
 @login_required
 def admin():
-    user = current_user
-    if user.username != 'Admin':
+    # user = current_user
+    if current_user.username != 'admin3':
         flash('You must be an Admin to access the Admin page')
         return redirect(url_for('list_beer'))
     users = User.query.all()
@@ -209,7 +211,7 @@ def admin():
         if len(beer_score_list) > 0:
             for beer_score in beer_score_list:
                 beer_scores.append(beer_score.overall)
-            beer.avg_score = sum(beer_scores)/len(beer_scores)
+            beer.avg_score = round((sum(beer_scores)/len(beer_scores)),2)
             beer.num_reviews = len(beer_scores)
         else:
             beer.avg_score = 0
@@ -225,21 +227,51 @@ def admin():
         review.username = Review.query.get(review.id).user.username
     return render_template('admin.html', users= users, beers= beers, breweries= breweries, reviews= reviews)
 
-@app.route('/user_mod/<user_id>')
-def user_mod(user_id):
-    user_ed = User.query.get(user_id)
-    if updatedname != '':
-        user_ed.username = updatedname
-    db.session.commit() 
-    flash(f'{user_ed.username} updated!')
-           
-  
-    return redirect('user_mod.html', user_ed= user_ed)
+@app.route('/edit_entry/<id>/<form_type>', methods=['GET', 'POST'])
+def edit_entry(id, form_type):
+    if current_user.username != 'admin3':
+        flash('You must be an Admin to make edits')
+        return redirect(url_for('list_beer'))
+    if form_type == 'user':
+        user = User.query.get(user_id)
+        form = SignupForm()
+    if form.validate_on_submit():
+        user.username=form.username.data
+        user.city=form.city.data
+        user.state=form.state.data
+        user.email=form.email.data
+        user.set_password(form.password.data)
+        db.session.commit() 
+        flash(f'{user.username} updated!')
+        print(f'Success! Updated user: {user.username}')  
+        return redirect(url_for('admin')) 
+    return render_template('edit_entry.html', user=user, form=form)
 
-# @app.route('/update', methods=['POST'])
-# def update():
-#     updatedname = form.username.data
-#     user.username = updatedname
-
-
+@app.route('/del_entry/<id>/<form_type>', methods=['GET', 'POST'])
+def del_entry(id, form_type):
+    if current_user.username != 'admin3':
+        flash('You must be an Admin to make edits')
+        return redirect(url_for('list_beer'))
+    if form_type == 'user':
+        print('user here')
+        temp_entity = User.query.get(id)
+        print(temp_entity)
+    elif form_type == 'beer':
+        temp_entity = Beer.query.get(id)
+    elif form_type == 'brewery':
+        temp_entity = Brewery.query.get(id)
+    elif form_type == 'review':
+        temp_entity = Review.query.get(id)
+    else:
+        flash(f'Something went wrong. Try again')
+        return redirect(url_for('admin'))
+    if temp_entity:
+        print('now here')
+        temp_id = temp_entity.id
+        db.session.delete(temp_entity)
+        db.session.commit() 
+        flash(f'Success! {form_type} {temp_id} deleted!')
+        print(f'Success! Deleted {form_type} {temp_id}')  
+        return redirect(url_for('admin')) 
+    return render_template('del_entry.html', user=user)
 

@@ -34,7 +34,8 @@ class SignupForm(FlaskForm):
     state = StringField('State')
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Reenter Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+    submit = SubmitField('Submit')
+
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

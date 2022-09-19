@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class="greet_user">
+    
+    <h2>Are you certain you want to delete {{user.username}}? This cannot be undone.</h2>
+
+</div>
+<br>
+<br>
+<div class="flash_message">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h2>{{ messages.pop() }}</h2> 
+        {% endif %}
+    {% endwith %}
+    
+</div>
+
+<div class="flex_container">
+        
+    <form action='' method="post">
+        Click YES to confirm
+        <input type = "submit" value="YES">
+        <a href='/admin'>Cancel</a>
+    </form>
+
+
+</div>
+
+{% endblock %}

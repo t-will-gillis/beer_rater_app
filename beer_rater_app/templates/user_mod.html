@@ -8,7 +8,7 @@
     
     <h2>USER MOD</h2><br><br>
     
-    <p>{{ user_ed.username }}</p>
+    <p>{{ current_user.username }}</p>
     
 </div>
 
@@ -23,25 +23,30 @@
 
 <div class="flex_container">
 
+    <h2>{{ user.username }} you're up!</h2>
 
-    <form action="/update" method="POST">
-        
-        <input type="text" value="{{ user_ed.username }}" name="udpatedname">
-            
-        <!-- <p>
-            {{ form.city(size=32,placeholder="City (optional)") }}<br>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username(size=32,placeholder=user.username) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.city(size=32,placeholder=user.city) }}<br>
             {% for error in form.city.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.state(size=32,placeholder="State (optional") }}<br>
+            {{ form.state(size=32,placeholder=user.state) }}<br>
             {% for error in form.state.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.email(size=32,placeholder="email@somemail.com") }}<br>
+            {{ form.email(size=32,placeholder=user.email) }}<br>
             {% for error in form.email.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
@@ -57,8 +62,9 @@
             {% for error in form.password2.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p> -->
-        <input type="submit" value="Update">
+        </p>
+        <p>{{ form.submit() }}</p>
+        
     </form>
 
 

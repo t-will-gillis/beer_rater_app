@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<div class="greet_user">
+    
+    <h2>USER MOD</h2><br><br>
+    
+    <p>{{ user.username }}</p>
+    
+</div>
+
+<br>
+<div class="flex_container">
+    
+    <h2>Edit Below</h2>
+
+</div>
+<br>
+<br>
+
+<div class="flex_container">
+
+    <h2>{{ user_ed.username }} you're up!</h2>
+    <h2>{{ user_ed.username = 'SuzieQ' }}</h2>
+   
+</div>
+
+{% endblock %}
+
+
+
