@@ -28,11 +28,12 @@
 
 <div class="flex_container">
         
-    <form action="" method="post">
-
+    <!-- <form action="" method="post"> -->
+        
 
     <form action="" method="post">
         {{ form.hidden_tag() }}
+        
         <p>
             {{ form.beer_id(width=26,placeholder="Beer") }}<br>
             {% for error in form.beer_id.errors %}

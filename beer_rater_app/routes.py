@@ -4,7 +4,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from forms import SignupForm, BreweryForm, BeerForm, ReviewForm, LoginForm
 from models import Beer, Brewery, User, Review
 
-
+# Temporary definition of admin
+legit_admin = 'admin44'    
 
 # Landing page
 @app.route('/')
@@ -198,7 +199,7 @@ def edit_review():
 @login_required
 def admin():
     # user = current_user
-    if current_user.username != 'admin3':
+    if current_user.username != legit_admin:
         flash('You must be an Admin to access the Admin page')
         return redirect(url_for('list_beer'))
     users = User.query.all()
@@ -224,16 +225,17 @@ def admin():
         review.beer_id = Review.query.get(review.id).beer.id
         review.beer_name = Review.query.get(review.id).beer.name
         review.brewery_name = Review.query.get(review.id).beer.brewery_name
-        review.username = Review.query.get(review.id).user.username
+        # review.username = Review.query.get(review.id).user.username
     return render_template('admin.html', users= users, beers= beers, breweries= breweries, reviews= reviews)
 
 @app.route('/edit_entry/<id>/<form_type>', methods=['GET', 'POST'])
 def edit_entry(id, form_type):
-    if current_user.username != 'admin3':
+    if current_user.username != legit_admin:
         flash('You must be an Admin to make edits')
         return redirect(url_for('list_beer'))
     if form_type == 'user':
-        user = User.query.get(user_id)
+        # user = User.query.get(user_id)
+        user = User.query.get(id)
         form = SignupForm()
     if form.validate_on_submit():
         user.username=form.username.data
@@ -249,7 +251,7 @@ def edit_entry(id, form_type):
 
 @app.route('/del_entry/<id>/<form_type>', methods=['GET', 'POST'])
 def del_entry(id, form_type):
-    if current_user.username != 'admin3':
+    if current_user.username != legit_admin:
         flash('You must be an Admin to make edits')
         return redirect(url_for('list_beer'))
     if form_type == 'user':

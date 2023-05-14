@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class="greet_user">
+    
+    <h2>Hi {{user.username}}! This is a PLACEHOLDER for the Edit Entry Page</h2>
+
+</div>
+<br>
+<br>
+<div class="flash_message">
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <h2>{{ messages.pop() }}</h2> 
+        {% endif %}
+    {% endwith %}
+    
+</div>
+
+<div class="flex_container">
+        
+    <p><br><br>This area will be the Edit Entry fields</p>
+
+
+</div>
+
+{% endblock %}

@@ -25,7 +25,8 @@ def beer_choices():
     choices.append(('9999' ,' -  Add Beer  -                   '))
     return choices
 
-
+def style_choices():
+    pass
 
 class SignupForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -71,7 +72,7 @@ class BreweryForm(FlaskForm):
 
 class ReviewForm(FlaskForm):
     beer_id = SelectField('Beer', choices=beer_choices(), validators=[InputRequired()], coerce=int)
-    user_id = IntegerField('User', default = 1)
+    user_id = IntegerField('User', default = 11)
     location = SelectField('Location', choices=['-   Select  Your  Location   -','At Brewery', 'Bar/ Restaurant', 'Home/Friends', 'Other'], validators=[InputRequired()])
     container = SelectField('Container', choices=['- Select Container Type -','Bottle', 'Can', 'Draft', 'Other'], validators=[InputRequired()])
     size = SelectField('Size', choices=['- Select Container Size -','22 oz / Bomber', '16 oz / Pint', '12 oz', 'Taster', 'Other'], validators=[InputRequired()])
